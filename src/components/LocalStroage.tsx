@@ -3,6 +3,7 @@ interface todoListesi {
   başlık: any;
   tamamlandı: boolean;
   oluşturmaTarihi: string;
+  düzenlemeTarihi:string
 }
 
 export function saveListToLocalStorage(liste: todoListesi[]) {

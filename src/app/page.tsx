@@ -13,6 +13,7 @@ interface todoListesi {
   başlık: any;
   tamamlandı: boolean;
   oluşturmaTarihi: string;
+  düzenlemeTarihi: string
 }
 
 export default function Page() {
@@ -46,6 +47,7 @@ export default function Page() {
         başlık: yeniBaşlık,
         tamamlandı: false,
         oluşturmaTarihi: moment().format("DD-MM-YYYY HH:mm:ss"),
+        düzenlemeTarihi: ""
       };
       setListe([...liste, newTodo]);
       setYeniBaşlık("");
@@ -76,7 +78,7 @@ export default function Page() {
   const saveEditedTitle = (id: number) => {
     setListe((prevListe) =>
       prevListe.map((item) =>
-        item.id === id ? { ...item, başlık: editedTitles[id] } : item
+        item.id === id ? { ...item, başlık: editedTitles[id], düzenlemeTarihi: moment().format(("DD-MM-YYYY HH:mm:ss")) } : item
       )
     );
     cancelEditing(id);
@@ -126,7 +128,7 @@ export default function Page() {
       </div>
 
       <div className="mt-4">
-        <div className="overflow-y-auto h-[30rem] md:h-80 w-3/5 m-auto border-4 rounded-xl">
+        <div className="overflow-y-auto h-[30rem] md:h-96 w-4/5 m-auto border-4 rounded-xl">
           {liste.map((item) => (
 
             <div className="grid md:flex md:py-2 md:flex-row gap-4 items-center border-b-4 border-gray-500">
@@ -135,10 +137,10 @@ export default function Page() {
 
               {editingItemIds.includes(item.id) ? (
 
-                <div className="w-2/3 flex justify-between">
+                <div className="flex items-center m-auto w-2/3">
 
                   <input
-                    className="border m-auto px-2 py-1 rounded w-1/2"
+                    className="border m-auto px-2 py-1 rounded  w-1/2"
                     value={editedTitles[item.id] || ""}
                     onChange={(e) =>
                       setEditedTitles((previousTitle) => ({
@@ -148,10 +150,10 @@ export default function Page() {
                     }
                   />
 
-                  <div className="flex space-x-1">
+                  <div className="space-x-3">
 
                     <button
-                      className="border ml-auto bg-green-500 text-white px-2 py-1 rounded"
+                      className="border bg-green-500 text-white px-2 py-1 rounded"
                       onClick={() => saveEditedTitle(item.id)}
                     >
                       Kaydet
@@ -192,9 +194,10 @@ export default function Page() {
 
               )}
 
-
-              <TodoDate creationDate={item.oluşturmaTarihi} />
-
+              <TodoDate 
+              creationDate={item.oluşturmaTarihi} 
+              editedDate={item.düzenlemeTarihi}
+              />
 
             </div>
 
