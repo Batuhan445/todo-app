@@ -1,7 +1,7 @@
 interface todoListesi {
   id: number;
   başlık: any;
-  tamamlandı: boolean;
+  isDone: boolean;
   oluşturmaTarihi: string;
   düzenlemeTarihi:string
 }

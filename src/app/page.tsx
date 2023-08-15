@@ -11,7 +11,7 @@ import TodoDate from "@/components/TodoDate";
 interface todoListesi {
   id: number;
   başlık: any;
-  tamamlandı: boolean;
+  isDone: boolean;
   oluşturmaTarihi: string;
   düzenlemeTarihi: string
 }
@@ -45,7 +45,7 @@ export default function Page() {
       const newTodo: todoListesi = {
         id: IdNumber,
         başlık: yeniBaşlık,
-        tamamlandı: false,
+        isDone: false,
         oluşturmaTarihi: moment().format("DD-MM-YYYY HH:mm:ss"),
         düzenlemeTarihi: ""
       };
@@ -60,7 +60,7 @@ export default function Page() {
     setListe(
       liste.map((eleman) =>
         eleman.id === id
-          ? { ...eleman, tamamlandı: !eleman.tamamlandı }
+          ? { ...eleman, isDone: !eleman.isDone }
           : eleman
       )
     );
@@ -98,7 +98,7 @@ export default function Page() {
   // Clear Todo List
 
   const clearIsDone = () => {
-    const afterClearUpdateID = liste.filter((item) => !item.tamamlandı);
+    const afterClearUpdateID = liste.filter((item) => !item.isDone);
 
     const updatedListWithID = afterClearUpdateID.map((item, index) => ({
       ...item,
@@ -107,7 +107,7 @@ export default function Page() {
     setListe(updatedListWithID);
   };
 
-  const clearButton = liste.some((item) => item.tamamlandı);
+  const clearButton = liste.some((item) => item.isDone);
 
   // On browser Page
 
@@ -127,6 +127,10 @@ export default function Page() {
 
       </div>
 
+      <div className=" mt-2 text-center">
+        Eğer bir listeyi tamamladıysanız o listenin üstüne tıklayarak "Tamamlananları Temizle" butonuna tıklayabilirsiniz
+      </div>
+
       <div className="mt-4">
         <div className="overflow-y-auto h-[30rem] md:h-96 w-4/5 m-auto border-4 rounded-xl">
           {liste.map((item) => (
@@ -140,8 +144,9 @@ export default function Page() {
                 <div className="flex items-center m-auto w-2/3">
 
                   <input
-                    className="border m-auto px-2 py-1 rounded  w-1/2"
+                    className="border m-auto px-2 py-1 rounded bg-blue-400 outline-blue-500 text-white placeholder:text-white placeholder:text-left text-center w-1/2"
                     value={editedTitles[item.id] || ""}
+                    placeholder="Todo Düzenle..."
                     onChange={(e) =>
                       setEditedTitles((previousTitle) => ({
                         ...previousTitle,
@@ -176,7 +181,7 @@ export default function Page() {
 
                   <div
                     className={`cursor-pointer border m-auto px-2 py-1 rounded w-1/2 text-center bg-blue-500 text-white ${
-                      item.tamamlandı ? "bg-red-500" : ""
+                      item.isDone ? "bg-red-500" : ""
                     }`}
                     onClick={() => tamamlandıİşlemi(item.id)}
                   >
@@ -213,4 +218,5 @@ export default function Page() {
     </div>
   );
 }
+
 
