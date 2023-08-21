@@ -117,6 +117,21 @@ export default function Page() {
     setListe(updatedListWithID);
   };
 
+
+  // Delete only list, not multiply delete
+  const deleteTodo = (id: number) => {
+    setListe((prevListe) => {
+      const updatedList = prevListe.filter((item) => item.id !== id);
+
+      const updatedListWithIDs = updatedList.map((item, index) => ({
+        ...item,
+        id: index + 1,
+      }));
+
+      return updatedListWithIDs;
+    });
+  };
+
   const clearButton = liste.some((item) => item.isDone);
 
   // On browser Page
@@ -202,6 +217,7 @@ export default function Page() {
                     item={item}
                     newTodoAdded={newTodoAppIsDone}
                     startEditing={startEditing}
+                    deleteTodo={deleteTodo}
                   />
 
                 )}
@@ -228,3 +244,5 @@ export default function Page() {
     </div>
   );
 }
+
+
