@@ -9,7 +9,7 @@ const TodoDate: React.FunctionComponent<TodoDateProps> = ({ creationDate, edited
 
   return (
     
-    <div className="border rounded px-2 py-1 bg-orange-400 text-white text-center">
+    <div className="border rounded px-2 py-1 border-orange-400 bg-orange-400 text-white text-center">
       Oluşturma Tarihi : {creationDate} <br/>
       {editedDate ? `Düzenleme Tarihi : ${editedDate}` : ""}
     </div>
