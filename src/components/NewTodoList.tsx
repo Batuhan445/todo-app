@@ -23,7 +23,7 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
 
   return (
 
-    <div className="grid md:flex md:justify-between items-center m-auto  md:w-3/5">
+    <div className="grid md:flex items-center m-auto md:w-3/5">
       
 
       <div
@@ -39,7 +39,16 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
       
       </div>
 
-      <div className="flex space-x-1 mt-2 md:m-0 m-auto md:mt-0">
+      <div className="flex  space-x-3 mt-2 m-auto md:ml-auto md:mt-auto">
+
+        <button
+          className="border md:mt-0 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded"
+          onClick={() => startEditing(item.id, item.başlık)}
+          style={{ fontSize: "20px"}}
+        >
+          <FaEdit />
+        </button>
+
 
         {item.isDone && (
 
@@ -53,13 +62,6 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
 
         )}
 
-        <button
-          className="border md:mt-0 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded"
-          onClick={() => startEditing(item.id, item.başlık)}
-          style={{ fontSize: "20px"}}
-        >
-          <FaEdit />
-        </button>
 
       </div>
 
