@@ -175,10 +175,10 @@ export default function Page() {
                 </div>
 
                 {editingItemIds.includes(item.id) ? (
-                  <div className="flex justify-between items-center m-auto w-2/3 md:w-3/5">
+                  <div className="grid md:flex justify-between items-center m-auto md:w-3/5">
 
                     <input
-                      className="border px-2 py-3 rounded bg-blue-400 outline-none border-blue-400 text-white placeholder:text-white  w-2/3"
+                      className="border px-2 py-3 rounded bg-blue-400 outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
                       placeholder="Todo Düzenle..."
                       onChange={(e) =>
@@ -189,7 +189,7 @@ export default function Page() {
                       }
                     />
 
-                    <div className="space-x-3">
+                    <div className="space-x-3 flex mt-2 md:mt-0 md:m-0 m-auto">
 
                       <button
                         className="border bg-green-500 border-green-500 text-white px-4 py-3 rounded"
@@ -212,6 +212,7 @@ export default function Page() {
                   </div>
                 ) : (
 
+                  
                   <NewTodoList
                     key={item.id}
                     item={item}
@@ -219,6 +220,7 @@ export default function Page() {
                     startEditing={startEditing}
                     deleteTodo={deleteTodo}
                   />
+                  
 
                 )}
 
