@@ -24,16 +24,19 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
   return (
 
     <div className="grid md:flex md:justify-between items-center m-auto  md:w-3/5">
+      
 
       <div
-        className={`cursor-pointer border py-3 rounded px-4 m-auto md:m-0 md:w-2/3 bg-blue-500 border-blue-500 text-white max-w-xl overflow-x-auto  ${
+        className={`cursor-pointer border py-3 rounded px-4 m-auto md:m-0 md:w-2/3 break-all bg-blue-500 border-blue-500 text-white ${
           item.isDone ? "line-through" : ""
         }`}
         onClick={() => newTodoAdded(item.id)}
+        style={{whiteSpace: "normal"}}
+        
       >
 
         {item.başlık}
-
+      
       </div>
 
       <div className="flex space-x-1 mt-2 md:m-0 m-auto md:mt-0">
