@@ -31,8 +31,6 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
           item.isDone ? "line-through" : ""
         }`}
         onClick={() => newTodoAdded(item.id)}
-        style={{whiteSpace: "normal"}}
-        
       >
 
         {item.başlık}
@@ -42,7 +40,7 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
       <div className="flex  space-x-3 mt-2 m-auto md:ml-auto md:mt-auto">
 
         <button
-          className="border md:mt-0 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded"
+          className="border border-white md:mt-0 hover:border-blue-500 hover:bg-blue-500 transition text-white px-4 py-3 rounded"
           onClick={() => startEditing(item.id, item.başlık)}
           style={{ fontSize: "20px"}}
         >
@@ -53,7 +51,7 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
         {item.isDone && (
 
           <button
-            className="border border-red-500 bg-red-500 text-white px-4 py-3 rounded mr-2"
+            className="border hover:border-red-500 hover:bg-red-500 transition text-white px-4 py-3 rounded mr-2"
             onClick={() => deleteTodo(item.id)}
             style={{ fontSize: "20px" }}
           >
