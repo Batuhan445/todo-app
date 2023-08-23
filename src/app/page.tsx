@@ -179,10 +179,11 @@ export default function Page() {
                   <div className="grid md:flex justify-between items-center m-auto md:w-3/5">
 
                     <textarea
-                      className="border px-4 py-3 rounded bg-blue-400 row-auto resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
+                      className="border px-4 py-3 rounded bg-blue-400  resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
                       style={{ overflow:"hidden" }}
                       rows={4}
+                      cols={50}
                       placeholder="Todo Düzenle..."
                       onChange={(e) => {
 
