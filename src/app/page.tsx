@@ -11,6 +11,7 @@ import TodoDate from "@/components/TodoDate";
 import Image from "next/image";
 import { FaEdit, FaTimes } from "react-icons/fa";
 import { LuSave } from "react-icons/lu";
+import { IconContext } from "react-icons";
 
 interface todoListesi {
   id: number;
@@ -141,7 +142,7 @@ export default function Page() {
 
       <div className="fixed inset-0">
         <Image
-          src="/img/background.jpg"
+          src="/img/background-2.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
@@ -168,7 +169,7 @@ export default function Page() {
           <div className=" w-4/5 m-auto rounded-xl">
 
             {liste.map((item) => (
-              <div className="grid md:flex py-2 px-2 md:flex-row gap-4 items-center border-4 rounded-xl mt-3 border-green-500">
+              <div className="grid md:flex py-4 px-2 md:flex-row gap-4 items-center border-2 shadow-2xl rounded-xl mt-5 border-white">
 
                 <div className="text-center text-white mt-2 md:mt-0 md:ml-4 md:w-8">
                   #{item.id}
@@ -177,10 +178,9 @@ export default function Page() {
                 {editingItemIds.includes(item.id) ? (
                   <div className="grid md:flex justify-between items-center m-auto md:w-3/5">
 
-                    <textarea
-                      className="border px-2 py-3 rounded h-auto bg-blue-400 outline-none break-all border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
+                    <input
+                      className="border px-4 py-3 rounded bg-blue-400 resize-none outline-none break-all border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
-                      style={{ height: '100px'}}
                       placeholder="Todo Düzenle..."
                       onChange={(e) =>
                         setEditedTitles((previousTitle) => ({
@@ -193,15 +193,17 @@ export default function Page() {
                     <div className="space-x-3 flex mt-2 md:mt-auto m-auto">
 
                       <button
-                        className="border bg-green-500 border-green-500 text-white px-4 py-3 rounded"
+                        className="border hover:bg-green-500 transition hover:border-green-500 text-white px-4 py-3 rounded"
                         onClick={() => saveEditedTitle(item.id)}
                         style={{ fontSize: "20px" }}
                       >
+
                         <LuSave />
+
                       </button>
 
                       <button
-                        className="border bg-red-500 border-red-500 text-white px-4 py-3 rounded"
+                        className="border hover:bg-red-500 hover:border-red-500 transition text-white px-4 py-3 rounded"
                         onClick={() => cancelEditing(item.id)}
                         style={{ fontSize: "20px" }}
                       >
@@ -238,7 +240,7 @@ export default function Page() {
           </div>
         </div>
 
-      <div className="flex justify-center mt-4 mb-4">
+      <div className="flex justify-center my-4">
         {clearButton && <ClearCompleteButton onClearCompleted={clearIsDone} />}
       </div>
 
