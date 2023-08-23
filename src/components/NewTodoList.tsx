@@ -37,10 +37,10 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
       
       </div>
 
-      <div className="flex  space-x-3 mt-2 m-auto md:ml-auto md:mt-auto">
+      <div className="flex space-x-3 mt-2 m-auto md:ml-auto md:mt-auto">
 
         <button
-          className="border border-white md:mt-0 hover:border-blue-500 hover:bg-blue-500 transition text-white px-4 py-3 rounded"
+          className="border border-blue-600 md:border-white hover:border-blue-600 bg-blue-600 md:bg-transparent hover:bg-blue-600  md:transition md:mt-0 text-white px-4 py-3 rounded"
           onClick={() => startEditing(item.id, item.başlık)}
           style={{ fontSize: "20px"}}
         >
@@ -51,7 +51,7 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
         {item.isDone && (
 
           <button
-            className="border hover:border-red-500 hover:bg-red-500 transition text-white px-4 py-3 rounded mr-2"
+            className="border border-red-500 md:border-white hover:border-red-500 bg-red-500 md:bg-transparent hover:bg-red-500 transition text-white px-4 py-3 rounded mr-2"
             onClick={() => deleteTodo(item.id)}
             style={{ fontSize: "20px" }}
           >
