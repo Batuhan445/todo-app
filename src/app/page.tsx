@@ -179,7 +179,7 @@ export default function Page() {
                   <div className="grid md:flex justify-between items-center m-auto md:w-3/5">
 
                     <input
-                      className="border px-4 py-3 rounded bg-blue-400 resize-none outline-none break-all border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
+                      className="border px-4 py-3 rounded bg-blue-400 resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
                       placeholder="Todo Düzenle..."
                       onChange={(e) =>
@@ -193,7 +193,7 @@ export default function Page() {
                     <div className="space-x-3 flex mt-2 md:mt-auto m-auto">
 
                       <button
-                        className="border hover:bg-green-500 transition hover:border-green-500 text-white px-4 py-3 rounded"
+                        className="border bg-green-500 border-green-500 md:border-white hover:border-green-500 md:bg-transparent hover:bg-green-500 transition  text-white px-4 py-3 rounded"
                         onClick={() => saveEditedTitle(item.id)}
                         style={{ fontSize: "20px" }}
                       >
@@ -203,7 +203,7 @@ export default function Page() {
                       </button>
 
                       <button
-                        className="border hover:bg-red-500 hover:border-red-500 transition text-white px-4 py-3 rounded"
+                        className="border bg-red-500 md:bg-transparent hover:bg-red-500 border-red-500 md:border-white hover:border-red-500 transition text-white px-4 py-3 rounded"
                         onClick={() => cancelEditing(item.id)}
                         style={{ fontSize: "20px" }}
                       >
