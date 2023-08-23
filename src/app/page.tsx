@@ -178,16 +178,23 @@ export default function Page() {
                 {editingItemIds.includes(item.id) ? (
                   <div className="grid md:flex justify-between items-center m-auto md:w-3/5">
 
-                    <input
-                      className="border px-4 py-3 rounded bg-blue-400 resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
+                    <textarea
+                      className="border px-4 py-3 rounded bg-blue-400 row-auto resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
+                      style={{ overflow:"hidden" }}
+                      rows={4}
                       placeholder="Todo Düzenle..."
-                      onChange={(e) =>
+                      onChange={(e) => {
+
+                        const textArea = e.target;
+                        textArea.style.height = 'auto'; 
+                        textArea.style.height = textArea.scrollHeight + 'px';  
+
                         setEditedTitles((previousTitle) => ({
                           ...previousTitle,
                           [item.id]: e.target.value,
-                        }))
-                      }
+                        }));
+                      }}
                     />
 
                     <div className="space-x-3 flex mt-2 md:mt-auto m-auto">
