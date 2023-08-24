@@ -158,12 +158,6 @@ export default function Page() {
           <NewTodoAddButton onTodoAddButton={() => yeniTodoEkle()} />
         </div>
 
-        <div className="flex justify-center text-center m-auto text-white mt-4 w-2/3 md:w-1/2 xl:w-full">
-          Listeyi silmek istiyorsanız listenin üstüne tıklayıp çöp kutusu
-          simgesine tıklayınız. Birden fazla listeyi silmek istiyorsanız aynı şekilde birden çok listenin üstüne tıklayıp 
-          en aşağıda "Tamamlananları Temizle" butonuna tıklayınız
-        </div>
-
         <div className="mt-4">
           <div className=" w-4/5 m-auto rounded-xl">
             {liste.map((item) => (
