@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import NewTodoInput from "@/components/NewTodoInput";
 import NewTodoAddButton from "@/components/NewTodoAddButton";
 import ClearCompleteButton from "@/components/ClearCompleteButton";
-import {loadListFromLocalStorage, saveListToLocalStorage} from "@/components/LocalStroage";
+import { loadListFromLocalStorage, saveListToLocalStorage } from "@/components/LocalStroage";
 import NewTodoList from "@/components/NewTodoList";
 import moment from "moment";
 import "moment/locale/tr";
 import TodoDate from "@/components/TodoDate";
 import Image from "next/image";
-import { FaEdit, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { LuSave } from "react-icons/lu";
-import { IconContext } from "react-icons";
 
 interface todoListesi {
   id: number;
@@ -25,11 +24,7 @@ export default function Page() {
   const [liste, setListe] = useState<todoListesi[]>([]);
   const [yeniBaşlık, setYeniBaşlık] = useState<string>("");
   const [editingItemIds, setEditingItemIds] = useState<number[]>([]);
-  const [editedTitles, setEditedTitles] = useState<{ [key: number]: string }>(
-    {}
-  );
-
-  
+  const [editedTitles, setEditedTitles] = useState<{ [key: number]: string }>({});
 
   // Save to Local Stroage
 
@@ -74,8 +69,8 @@ export default function Page() {
   // Start Edit Todo
 
   const startEditing = (id: number, title: string) => {
-    setEditingItemIds((prevIds) => [...prevIds, id]);
-    setEditedTitles((prevTitles) => ({ ...prevTitles, [id]: title }));
+    setEditingItemIds((previousIds) => [...previousIds, id]);
+    setEditedTitles((previousTitles) => ({ ...previousTitles, [id]: title }));
   };
 
   // After editing is saving
@@ -98,9 +93,11 @@ export default function Page() {
   // Todo Edit Cancel
 
   const cancelEditing = (id: number) => {
-    setEditingItemIds((prevIds) => prevIds.filter((prevId) => prevId !== id));
-    setEditedTitles((prevTitles) => {
-      const newTitles = { ...prevTitles };
+    setEditingItemIds((previousIds) =>
+      previousIds.filter((prevId) => prevId !== id)
+    );
+    setEditedTitles((previousTitles) => {
+      const newTitles = { ...previousTitles };
       delete newTitles[id];
       return newTitles;
     });
@@ -117,7 +114,6 @@ export default function Page() {
     }));
     setListe(updatedListWithID);
   };
-
 
   // Delete only list, not multiply delete
   const deleteTodo = (id: number) => {
@@ -139,7 +135,6 @@ export default function Page() {
 
   return (
     <div className="mt-10">
-
       <div className="fixed inset-0">
         <Image
           src="/img/background-2.jpg"
@@ -151,7 +146,6 @@ export default function Page() {
       </div>
 
       <div className="relative">
-
         <h1 className="text-center text-3xl text-white">Todo App</h1>
 
         <div className="flex justify-center mt-4">
@@ -164,13 +158,16 @@ export default function Page() {
           <NewTodoAddButton onTodoAddButton={() => yeniTodoEkle()} />
         </div>
 
+        <div className="flex justify-center text-center m-auto text-white mt-4 w-2/3 md:w-1/2 xl:w-full">
+          Listeyi silmek istiyorsanız listenin üstüne tıklayıp çöp kutusu
+          simgesine tıklayınız. Birden fazla listeyi silmek istiyorsanız aynı şekilde birden çok listenin üstüne tıklayıp 
+          en aşağıda "Tamamlananları Temizle" butonuna tıklayınız
+        </div>
+
         <div className="mt-4">
-
           <div className=" w-4/5 m-auto rounded-xl">
-
             {liste.map((item) => (
               <div className="grid md:flex py-4 px-2 md:flex-row gap-4 items-center border-2 shadow-2xl rounded-xl mt-5 border-white">
-
                 <div className="text-center text-white mt-2 md:mt-0 md:ml-4 md:w-8">
                   #{item.id}
                 </div>
@@ -181,15 +178,14 @@ export default function Page() {
                     <textarea
                       className="border px-4 py-3 rounded bg-blue-400  resize-none outline-none border-blue-400 text-white placeholder:text-white w-full md:w-2/3"
                       value={editedTitles[item.id] || ""}
-                      style={{ overflow:"hidden" }}
+                      style={{ overflow: "hidden" }}
                       rows={4}
                       cols={50}
                       placeholder="Todo Düzenle..."
                       onChange={(e) => {
-
                         const textArea = e.target;
-                        textArea.style.height = 'auto'; 
-                        textArea.style.height = textArea.scrollHeight + 'px';  
+                        textArea.style.height = "auto";
+                        textArea.style.height = textArea.scrollHeight + "px";
 
                         setEditedTitles((previousTitle) => ({
                           ...previousTitle,
@@ -201,9 +197,19 @@ export default function Page() {
                     <div className="space-x-3 flex mt-2 md:mt-auto m-auto">
 
                       <button
-                        className="border bg-green-500 border-green-500 md:border-white hover:border-green-500 md:bg-transparent hover:bg-green-500 transition  text-white px-4 py-3 rounded"
+
+                        className={`border ${
+                          !editedTitles[item.id] || editedTitles[item.id] === item.başlık
+                            ? "cursor-not-allowed bg-gray-400 border-gray-400  md:bg-transparent"
+                            : "bg-green-500 md:bg-transparent border-green-500 hover:border-green-500 hover:bg-green-500 text-white"
+                        } md:border-white transition text-white px-4 py-3 rounded`}
+
                         onClick={() => saveEditedTitle(item.id)}
                         style={{ fontSize: "20px" }}
+                        disabled={
+                          !editedTitles[item.id] ||
+                          editedTitles[item.id] === item.başlık
+                        }
                       >
 
                         <LuSave />
@@ -222,8 +228,6 @@ export default function Page() {
 
                   </div>
                 ) : (
-
-                  
                   <NewTodoList
                     key={item.id}
                     item={item}
@@ -231,8 +235,6 @@ export default function Page() {
                     startEditing={startEditing}
                     deleteTodo={deleteTodo}
                   />
-                  
-
                 )}
 
                 <div className="m-auto md:mr-auto">
@@ -241,21 +243,17 @@ export default function Page() {
                     editedDate={item.düzenlemeTarihi}
                   />
                 </div>
-
               </div>
-
             ))}
           </div>
         </div>
 
-      <div className="flex justify-center my-4">
-        {clearButton && <ClearCompleteButton onClearCompleted={clearIsDone} />}
+        <div className="flex justify-center my-4">
+          {clearButton && (
+            <ClearCompleteButton onClearCompleted={clearIsDone} />
+          )}
+        </div>
       </div>
-
-      </div>
-
     </div>
   );
 }
-
-
