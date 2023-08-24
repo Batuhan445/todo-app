@@ -5,10 +5,21 @@ interface ClearCompletedProps {
 }
 
 const clearCompleted: React.FunctionComponent<ClearCompletedProps> = ({onClearCompleted}) => {
+
+    const deleteAllTodoAlert = () => {
+        if (window.confirm("Birden fazla listeyi silmek üzeresiniz. Emin misiniz?")) {
+            onClearCompleted()
+            setTimeout (() => {
+                alert("Listeler başarıyla silindi");
+              }, 100)
+        }
+    }
+
+
     return (
     <button 
     className="border px-4 py-2 rounded border-emerald-600 bg-emerald-600 text-white" 
-    onClick={onClearCompleted}>
+    onClick={deleteAllTodoAlert}>
         Tamamlananları Temizle
     </button>
     )

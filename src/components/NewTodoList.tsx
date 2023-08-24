@@ -21,6 +21,16 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
   deleteTodo,
 }) => {
 
+  const handleDeleteClick = () => {
+    if (window.confirm("Listeyi silmek istediğinizden emin misiniz?")) {
+      deleteTodo(item.id);
+      setTimeout (() => {
+        alert("Liste başarıyla silindi");
+      }, 100)
+      
+    }
+  };
+
   return (
 
     <div className="grid md:flex items-center m-auto md:w-3/5">
@@ -52,7 +62,7 @@ const newTodoList: React.FunctionComponent<NewTodoListProps> = ({
 
           <button
             className="border border-red-500 md:border-white hover:border-red-500 bg-red-500 md:bg-transparent hover:bg-red-500 transition text-white px-4 py-3 rounded mr-2"
-            onClick={() => deleteTodo(item.id)}
+            onClick={handleDeleteClick}
             style={{ fontSize: "20px" }}
           >
             <FaTrash />
